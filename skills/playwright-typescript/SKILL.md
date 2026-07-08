@@ -285,15 +285,31 @@ Audit this spec for flaky waits, weak selectors, and unclear assertions.
 Do not edit yet. Return findings with risk levels and safe refactor suggestions.
 ```
 
+```text
 Use the Playwright TypeScript skill.
 Refactor this Playwright test to remove waitForTimeout, improve assertions, and preserve existing behavior.
 Modify only the relevant test and Page Object files.
+```
 
+```text
 Use the Playwright TypeScript skill.
 Review this Page Object. Check whether methods represent meaningful user actions, whether locators are stable, and whether assertions belong here.
+```
 
+```text
 Use the Playwright TypeScript skill.
 Analyze this trace summary and failure log. Decide whether the failure is caused by test flakiness, bad test data, environment instability, or a product bug.
+```
 
+```text
 Use the Playwright TypeScript skill.
 Design automation guidance for these QA scenarios. Do not write code until you identify fixtures, data setup, locator strategy, and assertions.
+```
+
+## Related standards
+
+- `standards/playwright-standards.md`
+- `standards/typescript-standards.md`
+- `standards/automation-standards.md`
+- `standards/api-testing-standards.md`
+- `templates/page-object-template.md`

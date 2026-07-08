@@ -306,17 +306,32 @@ Return a coverage matrix with positive, negative, auth, schema, and state checks
 Do not write framework-specific code yet.
 ```
 
+```text
 Use the API testing skill.
 Review these API tests and identify missing negative, authorization, schema, and side-effect assertions.
 Return findings by priority.
+```
 
+```text
 Use the API testing skill.
 Convert this API bug into regression scenarios.
 Include the original failure condition, expected behavior, and minimal regression coverage.
+```
 
+```text
 Use the API testing skill.
 Create a language-neutral API test plan for these CRUD operations.
 Separate smoke, regression, and full coverage.
+```
 
+```text
 Use the API testing skill with the Rest Assured Java skill.
 Turn this coverage matrix into JUnit 5 + Rest Assured implementation guidance.
+```
+
+## Related standards
+
+- `standards/api-testing-standards.md`
+- `standards/testing-standards.md`
+- `standards/automation-standards.md`
+- `templates/api-test-template.md`

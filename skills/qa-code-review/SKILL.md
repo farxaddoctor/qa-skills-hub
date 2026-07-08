@@ -1,17 +1,3 @@
-Да, этот `qa-code-review/SKILL.md` хороший, но пока он тоже **слишком общий**. Он описывает правильные принципы, но агенту не хватает строгого review-протокола:
-
-```text
-1. что читать сначала
-2. как классифицировать findings
-3. как отличать blocker от minor
-4. как не уходить в лишний refactor
-5. как проверять, что тест реально ловит дефект
-6. какой формат review возвращать
-```
-
-Я бы заменил файл на усиленную версию ниже.
-
-````md
 # QA Code Review Skill
 
 ## Purpose
@@ -331,7 +317,6 @@ Return:
 - Highest-priority fixes:
 - Suggested verification:
 ```
-````
 
 ### For audit tasks
 
@@ -456,12 +441,3 @@ Return a findings table and quick wins.
 - `standards/playwright-standards.md`
 - `standards/api-testing-standards.md`
 - `templates/pr-review-template.md`
-
-````
-
-После замены:
-
-```powershell
-git add skills/qa-code-review/SKILL.md
-git commit -m "Strengthen QA code review skill"
-````
