@@ -1,20 +1,43 @@
-# Generate Test Cases
+# Generate Test Cases Command
 
-Use `skills/qa-test-design/SKILL.md`.
+## Purpose
 
-## Prompt
+Compatibility command for QA design requests.
 
-Create test cases from the provided requirement, story, bug, or contract.
+## When to use
 
-## Expected Input
+- Use when older prompts ask to generate test cases.
+- Prefer `commands/qa-design.md` for new orchestration.
 
-- Requirement or behavior description.
-- Acceptance criteria, if available.
-- Constraints, risks, or supported platforms.
+## Inputs
 
-## Expected Output
+- Requirement, acceptance criteria, defect, workflow, or contract.
+- Expected behavior and constraints.
 
-- Grouped test scenarios.
+## Process
+
+1. Route through `agents/qa-orchestrator.md`.
+2. Apply Constitution, routing, and policies.
+3. Delegate to `commands/qa-design.md`.
+
+## Outputs
+
+- Scenario matrix.
 - Expected results.
-- Negative, edge, boundary, and regression coverage.
 - Assumptions and open questions.
+
+## Human Gate conditions
+
+Human approval is required before undocumented behavior assumptions or implementation handoff.
+
+## Related agents, workflows, policies, or skills
+
+- `commands/qa-design.md`
+- `agents/test-designer.md`
+- `workflows/requirement-to-test-plan.md`
+- `policies/human-gate-policy.md`
+
+## Application-agnostic constraints
+
+- Use placeholders only.
+- Do not create executable tests.

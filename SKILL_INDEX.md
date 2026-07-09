@@ -9,14 +9,14 @@ This repository is a reusable QA Automation Skills Hub. Skills should be loaded 
 Choose the skill based on the current task stage:
 
 ```text
-Requirement / idea / bug → qa-test-design
-API behavior / endpoint coverage → api-testing
-Playwright TypeScript automation → playwright-typescript
-Automation code or PR review → qa-code-review
-Failure / defect / flaky behavior → bug-analysis
-Test data design → test-data-generation
-Java API implementation → rest-assured-java
-Python automation implementation → pytest-python
+Requirement / idea / bug -> qa-test-design
+API behavior / endpoint coverage -> api-testing
+Playwright TypeScript automation -> playwright-typescript
+Automation code or PR review -> qa-code-review
+Failure / defect / flaky behavior -> bug-analysis
+Test data design -> test-data-generation
+Java API implementation -> rest-assured-java
+Python automation implementation -> pytest-python
 ```
 
 ## Skill Catalog
@@ -107,6 +107,29 @@ Examples:
 ### 5. Ask for confirmation when required context is missing
 
 If the task lacks requirements, expected behavior, API contract, code, or failure evidence, the agent must state assumptions and open questions instead of inventing product behavior.
+
+## Orchestration Layers
+
+Use the orchestration layer when the work needs more than one skill.
+
+| Layer | Location | Purpose |
+|---|---|---|
+| Skills | `skills/` | Reusable QA capabilities. |
+| Agents | `agents/` | Role definitions with responsibilities, inputs, outputs, and handoffs. |
+| Commands | `commands/` | User-facing entry points such as design, automate, audit, review, debug, and bug report. |
+| Workflows | `workflows/` | Multi-step QA processes with stop conditions and handoff formats. |
+| Routing | `routing/skill-routing-rules.md` | Decision rules for choosing agents, workflows, and skills. |
+| Policies | `policies/` | Safety rules for editing, leakage prevention, refactoring, and evidence. |
+
+### Agent routing quick map
+
+| Situation | Agent | Primary skill |
+|---|---|---|
+| Requirements unclear | `agents/test-designer.md` | `skills/qa-test-design/SKILL.md` |
+| API contract provided | `agents/api-test-engineer.md` | `skills/api-testing/SKILL.md` |
+| Playwright TypeScript automation requested | `agents/automation-engineer.md` | `skills/playwright-typescript/SKILL.md` |
+| Code or generated tests need review | `agents/qa-code-reviewer.md` | `skills/qa-code-review/SKILL.md` |
+| Failure or flaky behavior reported | `agents/bug-analyst.md` | `skills/bug-analysis/SKILL.md` |
 
 ## Skill Resolution Check
 
