@@ -114,12 +114,14 @@ Use the orchestration layer when the work needs more than one skill.
 
 | Layer | Location | Purpose |
 |---|---|---|
-| Skills | `skills/` | Reusable QA capabilities. |
-| Agents | `agents/` | Role definitions with responsibilities, inputs, outputs, and handoffs. |
-| Commands | `commands/` | User-facing entry points such as design, automate, audit, review, debug, and bug report. |
-| Workflows | `workflows/` | Multi-step QA processes with stop conditions and handoff formats. |
+| Constitution | `constitution/qa-agent-constitution.md` | Always-on rules for AI QA agents. |
+| Policies | `policies/` | Safety rules for editing, leakage prevention, refactoring, evidence, and approval. |
 | Routing | `routing/skill-routing-rules.md` | Decision rules for choosing agents, workflows, and skills. |
-| Policies | `policies/` | Safety rules for editing, leakage prevention, refactoring, and evidence. |
+| Workflows | `workflows/` | Multi-step QA processes with stop conditions and handoff formats. |
+| Agents | `agents/` | Role definitions with responsibilities, inputs, outputs, and handoffs. |
+| Skills | `skills/` | Reusable QA capabilities. |
+| Human Gate | `policies/human-gate-policy.md` | Mandatory approval checkpoints before risky actions. |
+| Commands | `commands/` | User-facing entry points such as design, automate, audit, review, debug, and bug report. |
 
 ### Agent routing quick map
 

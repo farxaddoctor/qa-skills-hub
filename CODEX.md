@@ -1,10 +1,11 @@
 # Codex Usage Guide
 
-Use this repository as a portable QA automation instruction pack when working inside other codebases.
+Use this repository as a portable QA automation orchestration pack when working inside other codebases.
 
 ## How Codex Should Use This Repository
 
-- Treat `skills/*/SKILL.md` files as task instructions.
+- Start with `constitution/qa-agent-constitution.md`, then apply `policies/`, `routing/`, `workflows/`, `agents/`, and selected `skills/`.
+- Treat `skills/*/SKILL.md` files as reusable capability modules, not the default entry point.
 - Treat `standards/*.md` files as quality bars.
 - Treat `templates/*.md` files as output shapes, not mandatory forms.
 - Keep generated code and examples in the consuming project, not in this repository.
@@ -12,12 +13,13 @@ Use this repository as a portable QA automation instruction pack when working in
 
 ## Suggested Workflow
 
-1. Read `SKILL_INDEX.md`.
-2. Select the relevant skill.
-3. Read any matching standards file.
+1. Read `SKILL_INDEX.md` and the Constitution.
+2. Use `routing/skill-routing-rules.md` to select a workflow and agent.
+3. Read the selected workflow, agent brief, and skills.
 4. Inspect the consuming project before suggesting edits.
-5. Implement or review according to the selected skill.
-6. Verify with the consuming project's normal test, lint, and typecheck commands when available.
+5. Apply audit-before-edit and Human Gate policies before risky changes.
+6. Implement, review, or report according to the selected workflow.
+7. Verify with the consuming project's normal test, lint, and typecheck commands when available.
 
 ## Boundaries
 
@@ -28,7 +30,7 @@ Use this repository as a portable QA automation instruction pack when working in
 
 ## Good Codex Prompts
 
-- "Use `skills/playwright-typescript/SKILL.md` to review this Playwright test for reliability."
-- "Use `skills/api-testing/SKILL.md` to design API coverage for this endpoint contract."
-- "Use `skills/qa-code-review/SKILL.md` and `standards/automation-standards.md` to review this PR."
-- "Use `skills/bug-analysis/SKILL.md` to analyze this failure log and propose next diagnostics."
+- "Use `commands/qa-design.md` to turn these requirements into QA coverage."
+- "Use `commands/qa-automate.md` to plan automation after test scenarios are clear."
+- "Use `commands/qa-review.md` to review this QA automation change."
+- "Use `commands/qa-debug.md` to analyze this failure log and propose next diagnostics."

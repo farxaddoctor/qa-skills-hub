@@ -1,20 +1,23 @@
 # Claude Code Orchestration
 
-Use this repository as a universal QA automation skills library.
+Use this repository as a universal QA automation orchestration library.
 
 ## Operating Rules
 
-- Start with `SKILL_INDEX.md` and select the smallest relevant skill.
-- Read the selected `skills/*/SKILL.md` before generating plans, tests, reviews, or bug analysis.
-- Add relevant files from `standards/` only when they improve the answer.
+- Start with `constitution/qa-agent-constitution.md` for always-on AI QA rules.
+- Use `routing/skill-routing-rules.md` to choose the workflow, agent, and skills.
+- Treat `workflows/` as the ordered process and `agents/` as role responsibilities.
+- Read selected `skills/*/SKILL.md` files only after routing identifies the needed capability.
+- Apply `policies/audit-before-edit.md` before file changes and `policies/human-gate-policy.md` before risky actions.
 - Keep all output project-neutral unless the consuming project provides specific context.
 - Do not invent application behavior, URLs, roles, credentials, selectors, or domain rules.
 - Do not add Selenium guidance unless the user explicitly expands scope later.
 
 ## Default Flow
 
-1. Identify task type: design, automation, review, bug analysis, or data generation.
-2. Load the matching skill.
-3. Ask for missing critical inputs only when assumptions would be risky.
-4. Produce concise, actionable QA output.
-5. Call out risks, assumptions, and gaps clearly.
+1. Apply the Constitution and relevant policies.
+2. Classify the request and route it through the orchestrator.
+3. Select the workflow, agent, and skill set.
+4. Ask for missing critical inputs only when assumptions would be risky.
+5. Follow audit and Human Gate requirements before edits or risky recommendations.
+6. Produce concise QA output with assumptions, gaps, handoffs, and verification notes.

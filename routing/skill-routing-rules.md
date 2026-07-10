@@ -45,15 +45,15 @@ Human Gate is required before broad refactor, auth/session changes, CI/CD change
 
 ## Related agents, workflows, policies, or skills
 
-| User intent | Workflow | Agent | Skills |
-|---|---|---|---|
-| Test design | `workflows/requirement-to-test-plan.md` | `agents/test-designer.md` | `skills/qa-test-design/SKILL.md` |
-| Automation planning | `workflows/test-plan-to-automation.md` | `agents/automation-engineer.md` | Framework skill selected by context |
-| API testing | `workflows/test-plan-to-automation.md` or API-focused design path | `agents/api-test-engineer.md` | `skills/api-testing/SKILL.md` |
-| Code review | `workflows/automation-review.md` | `agents/qa-code-reviewer.md` | `skills/qa-code-review/SKILL.md` |
-| Bug regression | `workflows/bug-to-regression.md` | `agents/bug-analyst.md` then `agents/test-designer.md` | `skills/bug-analysis/SKILL.md`, `skills/qa-test-design/SKILL.md` |
-| Flaky test investigation | `workflows/flaky-test-investigation.md` | `agents/bug-analyst.md` | `skills/bug-analysis/SKILL.md`, framework skill if needed |
-| QA audit | `workflows/automation-review.md` | `agents/qa-code-reviewer.md` | `skills/qa-code-review/SKILL.md` |
+| User intent              | Workflow                                                          | Agent                                                  | Skills                                                           |
+| ------------------------ | ----------------------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------- |
+| Test design              | `workflows/requirement-to-test-plan.md`                           | `agents/test-designer.md`                              | `skills/qa-test-design/SKILL.md`                                 |
+| Automation planning      | `workflows/test-plan-to-automation.md`                            | `agents/automation-engineer.md`                        | Framework skill selected by context                              |
+| API testing              | `workflows/test-plan-to-automation.md` or API-focused design path | `agents/api-test-engineer.md`                          | `skills/api-testing/SKILL.md`                                    |
+| Code review              | `workflows/automation-review.md`                                  | `agents/qa-code-reviewer.md`                           | `skills/qa-code-review/SKILL.md`                                 |
+| Bug regression           | `workflows/bug-to-regression.md`                                  | `agents/bug-analyst.md` then `agents/test-designer.md` | `skills/bug-analysis/SKILL.md`, `skills/qa-test-design/SKILL.md` |
+| Flaky test investigation | `workflows/flaky-test-investigation.md`                           | `agents/bug-analyst.md`                                | `skills/bug-analysis/SKILL.md`, framework skill if needed        |
+| QA audit                 | `workflows/automation-review.md`                                  | `agents/qa-code-reviewer.md`                           | `skills/qa-code-review/SKILL.md`                                 |
 
 Routing examples:
 
@@ -69,3 +69,12 @@ Routing examples:
 - Do not route based on product-specific role names, URLs, selectors, or domains.
 - Playwright is one possible automation skill, not the architecture.
 - Use placeholders only when examples are needed.
+
+# Skill status
+
+This skill is reserved for future implementation.
+
+Do not route active tasks to this skill yet.
+Use it only as a placeholder until the skill is fully defined.
+
+Performance and security testing skills are reserved capabilities unless their SKILL.md files are fully implemented.
