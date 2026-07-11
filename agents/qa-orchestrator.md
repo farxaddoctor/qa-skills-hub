@@ -23,7 +23,7 @@ Route QA requests through Constitution, policies, routing, workflows, agents, sk
 3. Use `routing/skill-routing-rules.md`.
 4. Select workflow, primary agent, and reusable skills.
 5. Check whether audit-before-edit or Human Gate is required.
-6. Produce a handoff or final orchestration decision.
+6. Produce a handoff using `standards/agent-handoff-standard.md` or a final orchestration decision.
 
 ## Outputs
 
@@ -43,6 +43,7 @@ Stop for Human Gate before broad refactor, auth/session changes, CI/CD changes, 
 - `routing/skill-routing-rules.md`
 - `constitution/qa-agent-constitution.md`
 - `policies/human-gate-policy.md`
+- `standards/agent-handoff-standard.md`
 - All workflow files in `workflows/`
 - All agents in `agents/`
 - All reusable skills in `skills/`

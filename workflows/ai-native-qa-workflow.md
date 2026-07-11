@@ -47,6 +47,7 @@ Human approval is required before broad refactor, auth/session changes, CI/CD ch
 - `routing/skill-routing-rules.md`
 - `policies/human-gate-policy.md`
 - `policies/audit-before-edit.md`
+- `standards/agent-handoff-standard.md`
 - All agents in `agents/`
 - All reusable skills in `skills/`
 

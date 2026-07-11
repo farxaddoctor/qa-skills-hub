@@ -61,6 +61,7 @@ Human approval is mandatory before:
 - `policies/safe-refactor-policy.md`
 - `policies/no-product-specific-leakage.md`
 - `agents/qa-orchestrator.md`
+- `standards/agent-handoff-standard.md`
 - All workflows in `workflows/`
 - All reusable skills in `skills/`
 
