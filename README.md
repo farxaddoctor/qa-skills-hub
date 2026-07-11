@@ -15,6 +15,7 @@ This repository is intentionally application-agnostic. It does not assume a comp
 - Workflow definitions for multi-step QA processes.
 - Routing rules and safety policies for agent handoffs.
 - Standards for test design, Playwright TypeScript, API testing, Rest Assured Java, Pytest Python, and review quality.
+- Architecture validation specifications for orchestration acceptance, routing, Human Gate, leakage, and compatibility behavior.
 - Templates for test cases, bug reports, API tests, page objects, and PR reviews.
 - Placeholder areas for attributed third-party material.
 
@@ -43,6 +44,7 @@ qa-skills-hub/
   routing/      Decision rules for selecting agents and skills
   policies/     Safety and evidence policies for agent behavior
   standards/    General engineering and QA standards
+  validation/   Architecture acceptance specifications
   templates/    Reusable markdown templates
   third-party/  Placeholder directories for copied or adapted external material
   docs/         Usage and attribution documentation
@@ -79,6 +81,12 @@ Command -> QA Orchestrator -> Constitution -> Policies -> Routing -> Workflow ->
 - Audit: evidence, scope, leakage, and edit-readiness checks before output or changes.
 - Human Gate: mandatory approval before broad refactor, auth/session changes, CI/CD changes, global config changes, dependency changes, file deletion, destructive cleanup, or assumptions about undocumented product behavior.
 - Output: final QA design, review, audit, diagnostic analysis, bug report, implementation plan, or handoff.
+
+## Validation
+
+The `validation/` directory defines architecture acceptance specifications, not executable product tests. Use it to check expected orchestration behavior, routing, Human Gate decisions, leakage prevention, and compatibility delegation across Claude Code, Codex, Cursor, and other compatible agents.
+
+Agent handoffs should follow `standards/agent-handoff-standard.md`.
 
 ## How To Use
 
