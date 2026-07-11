@@ -43,6 +43,19 @@ Expected output:
 
 Human Gate is required before broad refactor, auth/session changes, CI/CD changes, global config changes, dependency changes, file deletion, destructive cleanup, or assumptions about undocumented product behavior.
 
+## Command routing map
+
+Commands are entry points. Route each command through `agents/qa-orchestrator.md`, apply Constitution and policies, then select the workflow, agent, and skills below.
+
+| Command | Workflow | Agent | Skills |
+| --- | --- | --- | --- |
+| `commands/qa-design.md` | `workflows/requirement-to-test-plan.md` or `workflows/api-contract-to-tests.md` when an API contract is the main artifact | `agents/test-designer.md` or `agents/api-test-engineer.md` for API contracts | `skills/qa-test-design/SKILL.md`; add `skills/api-testing/SKILL.md` for API contracts |
+| `commands/qa-automate.md` | `workflows/test-plan-to-automation.md` | `agents/automation-engineer.md` or `agents/api-test-engineer.md` for API automation | Framework or language skill selected by context; add `skills/api-testing/SKILL.md` for API automation |
+| `commands/qa-review.md` | `workflows/automation-review.md` | `agents/qa-code-reviewer.md` | `skills/qa-code-review/SKILL.md`; add framework or language skill only when needed for the review target |
+| `commands/qa-audit.md` | `workflows/automation-review.md` | `agents/qa-code-reviewer.md` | `skills/qa-code-review/SKILL.md`; add framework or language skill only when needed for the audit scope |
+| `commands/qa-debug.md` | `workflows/flaky-test-investigation.md` or `workflows/bug-to-regression.md` | `agents/bug-analyst.md` | `skills/bug-analysis/SKILL.md`; add framework skill only when failure evidence requires it |
+| `commands/qa-bug-report.md` | `workflows/bug-to-regression.md` | `agents/bug-analyst.md` | `skills/bug-analysis/SKILL.md`; add `skills/qa-test-design/SKILL.md` only for regression coverage recommendations |
+
 ## Related agents, workflows, policies, or skills
 
 | User intent              | Workflow                                                          | Agent                                                  | Skills                                                           |
@@ -69,12 +82,3 @@ Routing examples:
 - Do not route based on product-specific role names, URLs, selectors, or domains.
 - Playwright is one possible automation skill, not the architecture.
 - Use placeholders only when examples are needed.
-
-# Skill status
-
-This skill is reserved for future implementation.
-
-Do not route active tasks to this skill yet.
-Use it only as a placeholder until the skill is fully defined.
-
-Performance and security testing skills are reserved capabilities unless their SKILL.md files are fully implemented.

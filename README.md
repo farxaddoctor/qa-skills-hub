@@ -1,12 +1,15 @@
 # QA Skills Hub
 
-QA Skills Hub is a reusable AI skills library for QA automation work across projects and coding agents. It is designed for Claude Code, Codex, Cursor, and other agentic coding tools that can read repository instructions and task-specific skill files.
+QA Skills Hub is an AI-native QA Agent Orchestration Architecture for reusable QA work across projects and coding agents. It coordinates commands, QA orchestration, constitution rules, policies, routing, workflows, agents, skills, audit checkpoints, and Human Gate approval before producing QA outputs.
+
+Skills are part of this architecture, but they are not the starting point. User intent enters through commands, then routing selects the workflow, agent, and reusable capability modules needed for the task.
 
 This repository is intentionally application-agnostic. It does not assume a company, product, staging URL, test account, user role, domain model, or existing test framework.
 
 ## What This Repository Provides
 
-- Reusable QA automation skills for AI coding agents.
+- AI-native QA orchestration for command-driven QA work.
+- Reusable QA capability modules for AI coding agents.
 - Agent role prompts for planning, implementation, review, and bug analysis.
 - Command prompts for common QA automation workflows.
 - Workflow definitions for multi-step QA processes.
@@ -47,38 +50,54 @@ qa-skills-hub/
 
 ## Orchestration Layers
 
+- Commands layer: user-facing entry points.
+- QA Orchestrator layer: central router for intent, evidence, constraints, and handoffs.
 - Constitution layer: always-on rules for AI QA agents.
 - Policies layer: safety, approval, no-leakage, audit, and refactor constraints.
 - Routing layer: selection of workflow, agent, and reusable skills.
 - Workflows layer: ordered execution processes.
 - Agents layer: reusable QA execution roles.
 - Skills layer: reusable capability modules.
+- Audit layer: evidence and edit-readiness checks before changes or recommendations.
 - Human Gate layer: stop and approval checkpoints.
-- Commands layer: user-facing entry points.
+- Output layer: reviewed QA artifact, recommendation, or handoff.
 
 ## AI-Native QA Architecture
 
 ```text
-Constitution -> Policies -> Routing -> Workflows -> Agents -> Skills -> Human Gate -> Commands
+Command -> QA Orchestrator -> Constitution -> Policies -> Routing -> Workflow -> Agent -> Skill -> Audit -> Human Gate -> Output
 ```
 
+- Command: user-facing entry point for intent such as design, automate, review, audit, debug, or bug report.
+- QA Orchestrator: first agent handoff that applies the architecture in order.
 - Constitution: always-on rules for safety, evidence-based QA reasoning, audit-before-edit, human approval, and no product-specific leakage.
 - Policies: safety and approval constraints that protect against unsafe edits, leakage, and risky refactors.
 - Routing: selection of the workflow, agent, and skills for the user request.
 - Workflows: ordered QA processes from intake through clarification, test design, automation strategy, implementation planning, review, and verification.
 - Agents: reusable QA execution roles with responsibilities and handoffs.
 - Skills: reusable capabilities selected by routing rules; Playwright TypeScript is only one possible automation skill.
+- Audit: evidence, scope, leakage, and edit-readiness checks before output or changes.
 - Human Gate: mandatory approval before broad refactor, auth/session changes, CI/CD changes, global config changes, dependency changes, file deletion, destructive cleanup, or assumptions about undocumented product behavior.
-- Commands: user-facing entry points that route through the orchestrator instead of directly calling skills.
+- Output: final QA design, review, audit, diagnostic analysis, bug report, implementation plan, or handoff.
 
 ## How To Use
 
-1. Pick the skill that matches the task from `SKILL_INDEX.md`.
-2. For multi-step work, select a command or workflow from `commands/` or `workflows/`.
-3. Apply routing rules from `routing/skill-routing-rules.md`.
-4. Provide project-specific context separately, such as framework conventions, existing fixtures, API contracts, or coding standards.
-5. Ask the agent to follow the selected skill, workflow, and relevant policies.
-6. Review the generated work before using it in a real project.
+Start from the command or user intent, then follow the orchestration path:
+
+```text
+Command -> QA Orchestrator -> Constitution -> Policies -> Routing -> Workflow -> Agent -> Skill -> Audit -> Human Gate -> Output
+```
+
+1. Identify the command or intent, such as `qa-design`, `qa-automate`, `qa-review`, `qa-audit`, `qa-debug`, or `qa-bug-report`.
+2. Route the request through `agents/qa-orchestrator.md`.
+3. Apply `constitution/qa-agent-constitution.md`.
+4. Apply relevant policies from `policies/`.
+5. Use `routing/skill-routing-rules.md` to select the workflow, responsible agent, and reusable skills.
+6. Follow the selected workflow from `workflows/`.
+7. Load only the skills selected by routing.
+8. Run audit checks before edits, recommendations, or final handoff.
+9. Stop at Human Gate when approval is required.
+10. Produce the requested QA output for review in the consuming project.
 
 ## Design Principles
 

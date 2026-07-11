@@ -7,13 +7,13 @@ Define always-on rules for AI QA agents using this repository.
 The architecture is:
 
 ```text
-Constitution -> Policies -> Routing -> Workflows -> Agents -> Skills -> Human Gate -> Commands
+Command -> QA Orchestrator -> Constitution -> Policies -> Routing -> Workflow -> Agent -> Skill -> Audit -> Human Gate -> Output
 ```
 
 ## When to use
 
 - Use at the start of every QA task.
-- Use before routing to any workflow, agent, command, or skill.
+- Use after command intake and before routing to any workflow, agent, or skill.
 - Use when deciding whether an AI agent may proceed or must stop for Human Gate approval.
 
 ## Inputs
