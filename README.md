@@ -88,6 +88,18 @@ The `validation/` directory defines architecture acceptance specifications, not 
 
 Agent handoffs should follow `standards/agent-handoff-standard.md`.
 
+### Static validation
+
+Run the repository's deterministic static checks locally with:
+
+```text
+python scripts/validate_repository.py
+```
+
+The validator uses only the Python standard library, performs no network access, and does not mutate the repository. Exit code `0` means all required checks passed, `1` means repository validation failures were found, and `2` means an internal or validator-configuration failure occurred. Errors use the sanitized form `[ERROR] <CHECK_ID> <path>:<line> <message>`; use the check ID, path, and line to correct the source without expecting a sensitive matched value to appear in output.
+
+The same command runs in CI on Windows and Linux for every push, pull request, and manual dispatch. The workflow is defined in `.github/workflows/static-validation.yml`.
+
 ## How To Use
 
 Start from the command or user intent, then follow the orchestration path:
