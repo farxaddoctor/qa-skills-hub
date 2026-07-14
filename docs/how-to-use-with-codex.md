@@ -1,37 +1,32 @@
 # How To Use With Codex
 
-Use this repository as supporting context when Codex is working inside a real application or test framework repository.
+Use the consumer repository's root `AGENTS.md` as the Codex entry point. It
+must reference the immutable hub dependency through the relative path
+`vendor/qa-skills-hub` and keep product-specific context in the consumer.
 
-## Basic Flow
-
-1. Ask Codex to read `SKILL_INDEX.md`.
-2. Name the relevant skill file.
-3. Provide the consuming project's code or requirements.
-4. Ask Codex to follow the skill and relevant standards.
-5. Let Codex inspect the consuming repository before editing.
-6. Run the consuming project's normal verification commands.
-
-## Example Prompts
+If the submodule is missing or uninitialized, stop and run from the consumer
+root:
 
 ```text
-Use qa-skills-hub/skills/qa-code-review/SKILL.md to review this PR.
-Focus on test value, flake risk, isolation, and missing assertions.
+python scripts/qa_hub.py bootstrap
 ```
+
+## Required flow
+
+Start each QA task with the applicable file under
+`vendor/qa-skills-hub/commands/`, then route through
+`vendor/qa-skills-hub/agents/qa-orchestrator.md`.
 
 ```text
-Use qa-skills-hub/skills/playwright-typescript/SKILL.md.
-Refactor this Playwright test in the current project using existing fixtures and locator conventions.
+Consumer root entry -> Hub command -> QA Orchestrator -> Constitution -> Policies -> Routing -> Workflow -> Agent -> Skills -> Audit -> Human Gate -> Output
 ```
 
-```text
-Use qa-skills-hub/skills/bug-analysis/SKILL.md.
-Analyze this CI failure and suggest diagnostics before changing code.
-```
+Do not invoke a skill directly or bypass orchestration. Skills are selected
+only after routing. Apply audit-before-edit and Human Gate requirements before
+changes, and keep generated product artifacts in the consumer repository.
 
-## Codex-Specific Notes
+Codex should inspect and preserve consumer conventions, run the consumer's
+normal verification commands, and report checks that could not be completed.
 
-- Codex should inspect the target project before implementation.
-- Codex should preserve existing project conventions.
-- Codex should avoid changing this skills repository when the requested work belongs in the consuming project.
-- Codex should verify changes with available tests, lint, or typecheck commands.
-- Codex should report any verification that could not be run.
+For clone, doctor, update, rollback, and CI details, see
+[docs/consumer-integration.md](consumer-integration.md).
