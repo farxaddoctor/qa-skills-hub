@@ -102,6 +102,9 @@ The same command runs in CI on Windows and Linux for every push, pull request, a
 
 ## How To Use
 
+For a reproducible, cross-agent consumer setup, see the
+[consumer integration guide](docs/consumer-integration.md).
+
 Start from the command or user intent, then follow the orchestration path:
 
 ```text
