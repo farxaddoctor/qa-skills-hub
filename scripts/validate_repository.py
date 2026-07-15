@@ -342,30 +342,31 @@ class Validator:
     def s4_009(self) -> None:
         edit_capable = re.compile(
             r"\b(?:"
-            r"implement(?:s|ed|ing|ation)?|"
-            r"modif(?:y|ies|ied|ication)|"
+            r"implement(?:s|ed|ing|ation|ations)?|"
+            r"modif(?:y|ies|ied|ying|ication|ications)|"
             r"edit(?:s|ed|ing)?|"
             r"updat(?:e|es|ed|ing)|"
             r"chang(?:e|es|ed|ing)|"
             r"refactor(?:s|ed|ing)?|"
-            r"delet(?:e|es|ed|ing|ion)|"
-            r"remov(?:e|es|ed|ing|al)|"
+            r"delet(?:e|es|ed|ing|ion|ions)|"
+            r"remov(?:e|es|ed|ing|al|als)|"
             r"dependenc(?:y|ies)|packages?|"
-            r"install(?:s|ed|ing|ation)?|"
+            r"install(?:s|ed|ing|ation|ations)?|"
             r"configur(?:e|es|ed|ing)|"
-            r"configuration\s+(?:changes?|updates?|edits?|modifications?)|"
-            r"(?:ci(?:/cd)?|workflow)\s+(?:changes?|updates?|edits?|modifications?|configuration)"
+            r"configurations?|"
+            r"(?:ci(?:/cd)?|workflows?)\s+(?:changes?|updates?|edits?|modifications?|configuration)"
             r")\b",
             re.IGNORECASE,
         )
-        non_executable = re.compile(
-            r"\bimplementation\s+(?:guidance|plan|planning|decision|recommendation|context)\b",
+        documentation_only = re.compile(
+            r"\b(?:(?:implementation|dependenc(?:y|ies)|packages?|configuration|ci(?:/cd)?|workflows?)\s+"
+            r"(?:documentation|examples?|guidance|overview|plans?|planning|decisions?|recommendations?|references?|context)|configuration\s+details?)\b",
             re.IGNORECASE,
         )
         audit = "policies/audit-before-edit.md"
         for case in self.cases:
             executable = " ".join(case.fields.get(field, "") for field in EXECUTABLE_CASE_FIELDS)
-            executable = non_executable.sub("", executable)
+            executable = documentation_only.sub("", executable)
             if edit_capable.search(executable) and audit not in self.refs(case.fields.get("Required policies", "")):
                 self.add("S4-009", case.path, case.lines.get("Required policies", case.heading_line), "edit-capable validation case omits audit-before-edit policy")
 
@@ -433,6 +434,7 @@ class Validator:
                     self.add("S4-012", path, self.line(text, match.start()), "recognized local Markdown link does not resolve")
     def s4_013(self) -> None:
         patterns = (
+            ("real URL", re.compile(r"https?://[^\s<>)\]`]+", re.IGNORECASE)),
             ("personal email-like value", re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.IGNORECASE)),
             ("credential or secret assignment", re.compile(r"\b(?:password|token|api[_ -]?key|secret|credential)\b\s*[:=]\s*(?![<\[])['\"]?[A-Za-z0-9][^\s,;]*", re.IGNORECASE)),
             ("private-key marker", re.compile(r"-----BEGIN [A-Z0-9 ]*PRIVATE KEY-----")),
@@ -440,13 +442,10 @@ class Validator:
             ("real selector assignment", re.compile(r"\b(?:selector|locator)\b\s*[:=]\s*['\"](?:#|\.)[A-Za-z][^'\"]+['\"]", re.IGNORECASE)),
             ("customer-specific identifier assignment", re.compile(r"\bcustomer[_ -]?id\b\s*[:=]\s*(?!<)['\"]?[A-Za-z0-9][A-Za-z0-9_-]{5,}", re.IGNORECASE)),
         )
-        url = re.compile(r"https?://[^\s<>)\]`]+", re.IGNORECASE)
         for path in self.tracked:
             text = self.tracked_text(path)
             if text is None:
                 continue
-            for match in url.finditer(text):
-                self.add("S4-013", path, self.line(text, match.start()), "prohibited real URL detected; matched value redacted")
             for category, pattern in patterns:
                 for match in pattern.finditer(text):
                     self.add("S4-013", path, self.line(text, match.start()), f"prohibited {category} detected; matched value redacted")
@@ -458,11 +457,13 @@ class Validator:
     def s4_014(self) -> None:
         constitution_path = "constitution/qa-agent-constitution.md"
         constitution = self.text(constitution_path)
-        chains = [self.chain(line) for line in constitution.splitlines() if "Command" in line and "QA Orchestrator" in line and "->" in line]
+        chain_pattern = re.compile(r"^\s*(Command\s*->.+?)\s*$", re.MULTILINE)
+        chains = [self.chain(match.group(1)) for match in chain_pattern.finditer(constitution)]
         if len(chains) != 1:
             self.add("S4-014", constitution_path, 1, "Constitution must contain exactly one authoritative architecture chain")
             return
         authoritative = chains[0]
+        authoritative_parts = authoritative.split(" -> ")
         normative_paths = (
             "README.md",
             "SKILL_INDEX.md",
@@ -471,11 +472,13 @@ class Validator:
         )
         for path in normative_paths:
             text = self.text(path)
-            declarations = list(re.finditer(r"^.*Command.*QA Orchestrator.*Audit.*Human Gate.*Output.*$", text, re.MULTILINE))
-            if not declarations:
+            declarations = list(chain_pattern.finditer(text))
+            normalized = [self.chain(match.group(1)) for match in declarations]
+            if authoritative not in normalized:
                 self.add("S4-014", path, 1, "normative architecture declaration is missing")
-            for match in declarations:
-                if self.chain(match.group(0)) != authoritative:
+            for match, declaration in zip(declarations, normalized):
+                parts = declaration.split(" -> ")
+                if parts != authoritative_parts[:len(parts)]:
                     self.add("S4-014", path, self.line(text, match.start()), "normative architecture declaration differs from the Constitution")
         for path in self.canonical_commands():
             process, start = self.process(path)
