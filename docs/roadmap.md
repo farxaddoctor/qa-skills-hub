@@ -27,7 +27,7 @@ The following foundations are confirmed by the current repositories and Git hist
 - The AI-native QA orchestration and repository validation layers are present.
 - Stage 4 delivered deterministic static validation for the Hub at commit `81197bf84ed51913bc3a93ace41661ab80a8e3b9`.
 - Stage 5 delivered reproducible Consumer integration and its Hub integration guide.
-- The current Hub HEAD, `4bea1c33955df415b40eca2e0faae50836b7354d`, contains the Stage 4 validator review fixes.
+- The current Hub HEAD, `6dac377256c58830e937eb97f8c9fe3bcf3928c6`, contains the Stage 4 validator review fixes.
 
 These completed foundations do not constitute Stage 6 or Stage 7 acceptance evidence.
 
@@ -97,7 +97,7 @@ Stage 6 defines contracts. It does not execute evidence scenarios and does not c
 
 ### Current status
 
-`NOT STARTED`
+`IN PROGRESS`
 
 No current manifest or payload/routing trace schema satisfies these criteria. The early baseline described below does not change this status.
 
