@@ -136,9 +136,11 @@ Execute evidence under controlled conditions and produce reproducible, validator
 
 ### Current status
 
-`NOT STARTED`
+`IN PROGRESS`
 
-No controlled Stage 7 evidence execution, sandbox validator, oracle change-control process, or reproducibility-backed acceptance set currently satisfies these criteria.
+Approved Stage 7 validator-foundation implementation work has begun from Consumer planning baseline `89977e62e7f094322667e689e6fab9188587c995`.
+
+Controlled execution has not started. No evidence, acceptance, release-readiness, or reproducibility claim is made here, and the Stage 7 acceptance criteria remain unchanged.
 
 ## Historical note - early baseline
 
